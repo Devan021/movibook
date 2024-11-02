@@ -15,7 +15,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Film, Search, ChevronDown, ChevronLeft, ChevronRight, Star, Bell, Laugh, Heart, Zap, Skull, Ghost, Facebook, Twitter, Instagram, Youtube, MapPin, Calendar, Clock, Ticket, ThumbsUp, Award } from 'lucide-react'
 
-const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']
+const cities = ['Bangalore', 'Chennai', 'Trivandrum', 'Delhi', 'Hyderabad']
 
 const featuredMovies = [
   {
@@ -23,38 +23,38 @@ const featuredMovies = [
     title: "Inception",
     genre: "Sci-Fi, Action",
     rating: 4.8,
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/assets/inception.jpeg?height=600&width=1200"
   },
   {
     id: 2,
     title: "The Dark Knight",
     genre: "Action, Crime, Drama",
     rating: 4.9,
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/assets/dakrnight.jpg?height=600&width=1200"
   },
   {
     id: 3,
     title: "Interstellar",
     genre: "Sci-Fi, Adventure",
     rating: 4.7,
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/assets/interstellar.jpg?height=600&width=1200"
   },
   {
     id: 4,
-    title: "Dunkirk",
+    title: "1000 babies",
     genre: "War, Action, Drama",
     rating: 4.6,
-    image: "/placeholder.svg?height=600&width=1200"
+    image: "/assets/1000babies.jpg?height=600&width=1200"
   }
 ]
 
 const movies = [
-  { id: 1, title: "Inception", language: "English", format: "2D", rating: 4.8, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-07-15" },
-  { id: 2, title: "The Dark Knight", language: "English", format: "IMAX", rating: 4.9, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-07-22" },
-  { id: 3, title: "Interstellar", language: "English", format: "3D", rating: 4.7, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-07-29" },
-  { id: 4, title: "Dunkirk", language: "English", format: "2D", rating: 4.6, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-08-05" },
-  { id: 5, title: "Tenet", language: "English", format: "IMAX", rating: 4.5, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-08-12" },
-  { id: 6, title: "Oppenheimer", language: "English", format: "IMAX", rating: 4.9, image: "/placeholder.svg?height=400&width=300", releaseDate: "2023-08-19" },
+  { id: 1, title: "Inception", language: "English", format: "2D", rating: 4.8, image: "/assets/inception.jpeg?height=400&width=300", releaseDate: "2023-07-15" },
+  { id: 2, title: "The Dark Knight", language: "English", format: "IMAX", rating: 4.9, image: "/assets/dakrnight.jpg?height=400&width=300", releaseDate: "2023-07-22" },
+  { id: 3, title: "Interstellar", language: "English", format: "3D", rating: 4.7, image: "/assets/interstellar.jpg?height=400&width=300", releaseDate: "2023-07-29" },
+  { id: 4, title: "Dunkirk", language: "English", format: "2D", rating: 4.6, image: "/assets/premalu.jpeg?height=400&width=300", releaseDate: "2023-08-05" },
+  { id: 5, title: "Tenet", language: "English", format: "IMAX", rating: 4.5, image: "/assets/1000babies.jpg?height=400&width=300", releaseDate: "2023-08-12" },
+  { id: 6, title: "Oppenheimer", language: "English", format: "IMAX", rating: 4.9, image: "/assets/inception.jpeg?height=400&width=300", releaseDate: "2023-08-19" },
 ]
 
 const categories = [
@@ -67,9 +67,9 @@ const categories = [
 ]
 
 const testimonials = [
-  { id: 1, name: "John Doe", comment: "The best movie booking experience I've ever had!", rating: 5 },
-  { id: 2, name: "Jane Smith", comment: "Seamless booking process and great selection of movies!", rating: 4.5 },
-  { id: 3, name: "Mike Johnson", comment: "I love the user-friendly interface and quick ticket delivery.", rating: 5 },
+  { id: 1, name: "Bharath", comment: "The best movie booking experience I've ever had!", rating: 5 },
+  { id: 2, name: "Niranjan", comment: "Seamless booking process and great selection of movies!", rating: 4.5 },
+  { id: 3, name: "Anjana", comment: "I love the user-friendly interface and quick ticket delivery.", rating: 5 },
 ]
 
 export default function Landing() {
@@ -143,7 +143,7 @@ export default function Landing() {
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost">Sign In</Button>
+              <Button variant="ghost" href="#">Sign In</Button>
               <Button variant="default">Register</Button>
             </div>
 

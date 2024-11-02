@@ -1,134 +1,165 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { CalendarDays, MapPin, Ticket } from 'lucide-react'
+import { User, Mail, Phone, MapPin, CreditCard, Ticket } from 'lucide-react'
 
-export default function UserProfilePage() {
-  const [user, setUser] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    avatar: "/images/avatars/john-doe.jpg",
-  })
+// Mock data - replace with API call in production
+const userProfile = {
+  name: "John Doe",
+  email: "john.doe@example.com",
+  phone: "+1 234 567 8900",
+  address: "123 Movie St, Cinema City, 12345",
+}
 
-  const bookingHistory = [
-    { id: 1, movie: "Inception", date: "2023-05-15", cinema: "Cineplex Downtown" },
-    { id: 2, movie: "The Dark Knight", date: "2023-06-20", cinema: "Starlight Megaplex" },
-    { id: 3, movie: "Interstellar", date: "2023-07-10", cinema: "IMAX Theater" },
-  ]
+const bookingHistory = [
+  { id: 1, movie: "Inception", date: "2023-07-10", time: "7:00 PM", seats: "A1, A2" },
+  { id: 2, movie: "The Dark Knight", date: "2023-06-15", time: "8:30 PM", seats: "B3, B4" },
+  { id: 3, movie: "Interstellar", date: "2023-05-20", time: "6:45 PM", seats: "C2, C3, C4" },
+]
 
-  const handleProfileUpdate = (e: React.FormEvent) => {
+export default function Profile() {
+  const [isEditing, setIsEditing] = useState(false)
+  const [profile, setProfile] = useState(userProfile)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setProfile(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle profile update logic here
-    console.log('Profile update:', user)
+    // In a real app, you would send the updated profile to your backend here
+    console.log('Updated profile:', profile)
+    setIsEditing(false)
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row gap-8">
-        <aside className="w-full md:w-1/3">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <CardTitle>{user.name}</CardTitle>
-                  <CardDescription>{user.email}</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full">Edit Profile</Button>
-            </CardContent>
-          </Card>
-        </aside>
-        <main className="w-full md:w-2/3">
-          <Tabs defaultValue="profile">
-            <TabsList className="w-full">
-              <TabsTrigger value="profile" className="w-full">Profile</TabsTrigger>
-              <TabsTrigger value="bookings" className="w-full">Booking History</TabsTrigger>
-            </TabsList>
-            <TabsContent value="profile">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
-                  <CardDescription>Update your profile details here</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleProfileUpdate} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        value={user.name}
-                        onChange={(e) => setUser({...user, name: e.target.value})}
-                      />
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        <motion.h1 
+          className="text-3xl font-bold mb-8 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          User Profile
+        </motion.h1>
+
+        <Tabs defaultValue="profile" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="bookings">Booking History</TabsTrigger>
+          </TabsList>
+          <TabsContent value="profile">
+            <Card>
+              <CardHeader>
+                <CardTitle>Personal Information</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit}>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <User className="w-5 h-5" />
+                      <div className="flex-1">
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={profile.name}
+                          onChange={handleInputChange}
+                          disabled={!isEditing}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={user.email}
-                        onChange={(e) => setUser({...user, email: e.target.value})}
-                      />
+                    <div className="flex items-center space-x-4">
+                      <Mail className="w-5 h-5" />
+                      <div className="flex-1">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={profile.email}
+                          onChange={handleInputChange}
+                          disabled={!isEditing}
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="password">New Password</Label>
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Enter new password"
-                      />
+                    <div className="flex items-center space-x-4">
+                      <Phone className="w-5 h-5" />
+                      <div className="flex-1">
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          value={profile.phone}
+                          onChange={handleInputChange}
+                          disabled={!isEditing}
+                        />
+                      </div>
                     </div>
-                    <Button type="submit">Save Changes</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="bookings">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Booking History</CardTitle>
-                  <CardDescription>Your recent movie bookings</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4">
-                    {bookingHistory.map((booking) => (
-                      <li key={booking.id} className="border-b pb-4 last:border-b-0">
-                        <h3 className="font-semibold">{booking.movie}</h3>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 mt-2">
-                          <span className="flex items-center">
-                            <CalendarDays className="mr-1 h-4 w-4" />
-                            {booking.date}
-                          </span>
-                          <span className="flex items-center">
-                            <MapPin className="mr-1 h-4 w-4" />
-                            {booking.cinema}
-                          </span>
+                    <div className="flex items-center space-x-4">
+                      <MapPin className="w-5 h-5" />
+                      <div className="flex-1">
+                        <Label htmlFor="address">Address</Label>
+                        <Input
+                          id="address"
+                          name="address"
+                          value={profile.address}
+                          onChange={handleInputChange}
+                          disabled={!isEditing}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {isEditing ? (
+                    <div className="mt-6 flex justify-end space-x-4">
+                      <Button type="submit" className="bg-[#EF4444] hover:bg-[#DC2626]">Save Changes</Button>
+                      <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>Cancel</Button>
+                    </div>
+                  ) : (
+                    <Button type="button" className="mt-6" onClick={() => setIsEditing(true)}>Edit Profile</Button>
+                  )}
+                </form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="bookings">
+            <Card>
+              <CardHeader>
+                <CardTitle>Booking History</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {bookingHistory.map((booking) => (
+                    <Card key={booking.id}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h3 className="font-bold">{booking.movie}</h3>
+                            <p className="text-sm text-gray-600">{booking.date} at {booking.time}</p>
+                            <p className="text-sm text-gray-600">Seats: {booking.seats}</p>
+                          </div>
+                          <Button variant="outline" asChild>
+                            <a href={`/tickets/${booking.id}`} target="_blank" rel="noopener noreferrer">
+                              View Ticket
+                            </a>
+                          </Button>
                         </div>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    <Ticket className="mr-2 h-4 w-4" />
-                    View All Bookings
-                  </Button>
-                </CardFooter>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )

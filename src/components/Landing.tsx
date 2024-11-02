@@ -15,7 +15,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Film, Search, ChevronDown, ChevronLeft, ChevronRight, Star, Bell, Laugh, Heart, Zap, Skull, Ghost, Facebook, Twitter, Instagram, Youtube, MapPin, Calendar, Clock, Ticket, ThumbsUp, Award } from 'lucide-react'
 
-const cities = ['Bangalore', 'Chennai', 'Trivandrum', 'Delhi', 'Hyderabad']
+const cities = ['Bangalore', 'Chennai', 'Chicago', 'Houston', 'Phoenix']
 
 const featuredMovies = [
   {
@@ -73,7 +73,7 @@ const testimonials = [
 ]
 
 export default function Landing() {
-  const [currentCity, setCurrentCity] = useState('New York')
+  const [currentCity, setCurrentCity] = useState('Trivandrum')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [language, setLanguage] = useState('All')
@@ -101,102 +101,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <motion.header 
-        className="bg-[#1F2937] text-white py-4 sticky top-0 z-50"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 100 }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2">
-              <Film className="h-6 w-6 text-[#EF4444]" />
-              <span className="text-xl font-bold">MovieBook</span>
-            </Link>
-
-            <div className="hidden md:flex items-center space-x-4 flex-1 max-w-xl mx-4">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                  type="search"
-                  placeholder="Search for movies"
-                  className="pl-10 bg-white text-black w-full"
-                />
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="flex items-center space-x-1">
-                    <MapPin className="h-4 w-4" />
-                    <span>{currentCity}</span>
-                    <ChevronDown className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {cities.map((city) => (
-                    <DropdownMenuItem key={city} onSelect={() => setCurrentCity(city)}>
-                      {city}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" href="#">Sign In</Button>
-              <Button variant="default">Register</Button>
-            </div>
-
-            <button
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                <path d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-              </svg>
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div 
-                className="mt-4 md:hidden"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="flex flex-col space-y-4">
-                  <Input
-                    type="search"
-                    placeholder="Search for movies"
-                    className="bg-white text-black"
-                  />
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="flex items-center justify-between w-full">
-                        <MapPin className="h-4 w-4" />
-                        <span>{currentCity}</span>
-                        <ChevronDown className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      {cities.map((city) => (
-                        <DropdownMenuItem key={city} onSelect={() => setCurrentCity(city)}>
-                          {city}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <Button variant="ghost" className="w-full">Sign In</Button>
-                  <Button variant="default" className="w-full">Register</Button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.header>
+     
 
       <main>
         {/* Hero Section */}
@@ -520,59 +425,7 @@ export default function Landing() {
         </motion.section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#1F2937] text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">About MovieBook</h3>
-              <p className="text-sm text-gray-400 mb-4">MovieBook is your one-stop destination for hassle-free movie ticket bookings. Enjoy the latest blockbusters with just a few clicks!</p>
-              <div className="flex space-x-4">
-                <Link href="#" aria-label="Facebook"><Facebook /></Link>
-                <Link href="#" aria-label="Twitter"><Twitter /></Link>
-                <Link href="#" aria-label="Instagram"><Instagram /></Link>
-                <Link href="#" aria-label="Youtube"><Youtube /></Link>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/faq">FAQs</Link></li>
-                <li><Link href="/terms">Terms of Service</Link></li>
-                <li><Link href="/privacy">Privacy Policy</Link></li>
-                <li><Link href="/contact">Contact Us</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Genres</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/genre/action">Action</Link></li>
-                <li><Link href="/genre/comedy">Comedy</Link></li>
-                <li><Link href="/genre/drama">Drama</Link></li>
-                <li><Link href="/genre/horror">Horror</Link></li>
-                <li><Link href="/genre/sci-fi">Sci-Fi</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-              <p className="text-sm text-gray-400 mb-4">Stay updated with the latest movies and exclusive offers!</p>
-              <form className="flex flex-col space-y-2">
-                <Input type="email" placeholder="Your email" className="bg-white text-black" />
-                <Button type="submit" className="bg-[#EF4444] hover:bg-[#DC2626]">Subscribe</Button>
-              </form>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400">&copy; 2023 MovieBook. All rights reserved.</p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <Link href="/terms" className="text-sm text-gray-400 hover:text-white">Terms</Link>
-              <Link href="/privacy" className="text-sm text-gray-400 hover:text-white">Privacy</Link>
-              <Link href="/cookies" className="text-sm text-gray-400 hover:text-white">Cookies</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+  
     </div>
   )
 }

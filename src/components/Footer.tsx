@@ -1,45 +1,67 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Film, Facebook, Twitter, Instagram } from 'lucide-react'
 
-export function Footer() {
+export default function Footer() {
   return (
-    <footer className="bg-muted mt-12">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="font-semibold text-lg mb-4">MovieMaster</h3>
-            <p className="text-sm text-muted-foreground">Your one-stop destination for booking movie tickets online.</p>
+    <footer className="bg-[#1F2937] text-white py-8">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          {/* Logo and Description */}
+          <div className="flex items-center space-x-2">
+            <Film className="h-6 w-6 text-[#EF4444]" />
+            <span className="text-xl font-bold">MovieBook</span>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:underline">About Us</Link></li>
-              <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-              <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
-              <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-            </ul>
+
+          {/* Quick Links */}
+          <div className="flex space-x-6">
+            <Link 
+              href="/about" 
+              className="text-sm text-gray-300 hover:text-white transition-colors"
+            >
+              About
+            </Link>
+            <Link 
+              href="/contact" 
+              className="text-sm text-gray-300 hover:text-white transition-colors"
+            >
+              Contact
+            </Link>
+            <Link 
+              href="/terms" 
+              className="text-sm text-gray-300 hover:text-white transition-colors"
+            >
+              Terms
+            </Link>
+            <Link 
+              href="/privacy" 
+              className="text-sm text-gray-300 hover:text-white transition-colors"
+            >
+              Privacy
+            </Link>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Connect With Us</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Facebook</a></li>
-              <li><a href="#" className="hover:underline">Twitter</a></li>
-              <li><a href="#" className="hover:underline">Instagram</a></li>
-              <li><a href="#" className="hover:underline">YouTube</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Subscribe to Our Newsletter</h4>
-            <form className="space-y-2">
-              <Input type="email" placeholder="Enter your email" />
-              <Button type="submit" className="w-full">Subscribe</Button>
-            </form>
+
+          {/* Social Links */}
+          <div className="flex items-center space-x-4">
+            <Link href="#" aria-label="Facebook" className="text-gray-300 hover:text-white transition-colors">
+              <Facebook className="h-5 w-5" />
+            </Link>
+            <Link href="#" aria-label="Twitter" className="text-gray-300 hover:text-white transition-colors">
+              <Twitter className="h-5 w-5" />
+            </Link>
+            <Link href="#" aria-label="Instagram" className="text-gray-300 hover:text-white transition-colors">
+              <Instagram className="h-5 w-5" />
+            </Link>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} MovieMaster. All rights reserved.
+
+        {/* Copyright */}
+        <div className="mt-8 pt-4 border-t border-gray-700 text-center">
+          <p className="text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} MovieBook. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

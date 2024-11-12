@@ -11,6 +11,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Film, Search, ChevronDown, MapPin } from 'lucide-react'
+import { LoginButton } from './loginButton'
 
 const cities = ['Bangalore', 'Chennai', 'Trivandrum', 'Delhi', 'Hyderabad']
 
@@ -57,12 +58,10 @@ const Header = () => {
 
                     {/* Desktop Menu Buttons */}
                     <div className="hidden md:flex items-center space-x-4">
-                        <Link href="/auth/login">
-                            <Button variant="ghost">Sign In</Button>
-                        </Link>
-                        <Link href="/auth/register">
-                            <Button variant="default">Register</Button>
-                        </Link>
+                        
+                            <LoginButton/>
+                        
+                        
                     </div>
 
                     <button 
